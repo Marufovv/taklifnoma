@@ -1,0 +1,11 @@
+// === STATIC HTML: CONFIG BILAN BIR XIL MAZMUN ===
+import fs from 'node:fs';import vm from 'node:vm';
+const scope={window:{}};vm.runInNewContext(fs.readFileSync(new URL('config.js',import.meta.url),'utf8'),scope);const c=scope.window.INVITATION;
+const esc=s=>String(s??'').replace(/[&<>"']/g,x=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[x]));
+const date=new Date(c.startsAt),tz={timeZone:'Asia/Tashkent'};
+const months=['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];const local=new Date(+date+18000000);const day=local.getUTCDate(),month=months[local.getUTCMonth()],year=local.getUTCFullYear();
+const time=d=>new Intl.DateTimeFormat('en-GB',{...tz,hour:'2-digit',minute:'2-digit'}).format(new Date(d));
+const data={...c,day,year,month:month[0].toUpperCase()+month.slice(1),dateFull:`${day}-${month} ${year}`,dateShort:`${day}.${String(local.getUTCMonth()+1).padStart(2,'0')}.${year}`,weekday:['YAKSHANBA','DUSHANBA','SESHANBA','CHORSHANBA','PAYSHANBA','JUMA','SHANBA'][local.getUTCDay()],times:time(c.startsAt)+'–'+time(c.endsAt),ogImage:new URL('assets/og.jpg',c.siteUrl).href,googleMap:`https://www.google.com/maps/dir/?api=1&destination=${c.coordinates.lat},${c.coordinates.lng}`,yandexMap:`https://yandex.com/maps/?pt=${c.coordinates.lng},${c.coordinates.lat}&z=16&l=map`};
+data.programHTML=c.program.map(x=>`<li class="reveal"><time>${esc(x.time)}</time><div><h3>${esc(x.title)}</h3><p>${esc(x.detail)}</p></div></li>`).join('');
+data.photosHTML=c.photos.map((p,i)=>`<figure class="photo-frame"><div class="photo-window"><span class="photo-fallback" aria-hidden="true">S & G</span>${p.src?`<img src="${esc(p.src)}" width="719" height="1280" alt="${esc(p.alt)}" loading="lazy" decoding="async">`:''}</div><figcaption><span>${esc(p.caption)}</span><small>0${i+1}</small></figcaption></figure>`).join('');
+const template=fs.readFileSync(new URL('template.html',import.meta.url),'utf8');const html=template.replace(/\{\{([\w.]+)\}\}/g,(_,path)=>{const value=path.split('.').reduce((v,k)=>v?.[k],data);if(value===undefined)throw Error('Unknown key '+path);return path.endsWith('HTML')?value:esc(value);});fs.writeFileSync(new URL('index.html',import.meta.url),html);console.log('index.html updated from config.js');

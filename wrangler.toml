@@ -1,0 +1,17 @@
+name = "sardorbek-gulsevar-wishes"
+main = "worker.mjs"
+compatibility_date = "2026-10-01"
+
+[vars]
+# Replace with your exact origin; no trailing slash, no GitHub repository path.
+ALLOWED_ORIGIN = "https://marufovv.github.io"
+COUPLE_NAMES = "Sardorbek & Gulsevar"
+ENABLE_RSVP = "false"
+
+[[durable_objects.bindings]]
+name = "RATE_LIMITER"
+class_name = "RateLimiter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["RateLimiter"]

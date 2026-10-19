@@ -1,0 +1,10 @@
+import assert from 'node:assert/strict';import fs from 'node:fs';import vm from 'node:vm';
+const base=new URL('../',import.meta.url),read=p=>fs.readFileSync(new URL(p,base));const scope={window:{}};vm.runInNewContext(read('config.js').toString(),scope);const c=scope.window.INVITATION,html=read('index.html').toString();
+assert.equal(c.siteUrl,'https://marufovv.github.io/aabbcc/');assert.equal(c.enableRsvp,false);assert.equal(c.photos.length,3);assert.equal(new Date(c.startsAt).toISOString(),'2026-10-25T07:00:00.000Z');assert.equal(new Date(c.endsAt).toISOString(),'2026-10-25T09:00:00.000Z');
+assert(!html.includes('/asd/'));assert(!html.includes('{{'));assert.equal((html.match(/<h1\b/g)||[]).length,1);assert.equal((html.match(/aria-live=/g)||[]).length,1);
+for(const path of [c.music.mp3,c.music.m4a,...c.photos.map(p=>p.src),c.artwork.webp,c.artwork.fallback,c.botanical.webp,c.botanical.fallback])assert(fs.existsSync(new URL(path,base)),path);
+assert(read(c.music.mp3).subarray(0,3).equals(Buffer.from('ID3')));assert.equal(read(c.music.m4a).subarray(4,8).toString(),'ftyp');
+for(const name of [c.artwork.webp,c.artwork.fallback,c.botanical.webp,c.botanical.fallback])assert(read(name).length<=250*1024,name+' exceeds 250 KiB');
+for(const name of ['og:url','og:image','twitter:image'])assert(new RegExp(`(?:property|name)="${name}" content="https://marufovv.github.io/aabbcc/`).test(html));
+for(const m of html.matchAll(/(?:src|href|srcset)="([^"#]+)"/g)){const path=m[1];if(!path.startsWith('http'))assert(fs.existsSync(new URL(path,base)),path);}
+const files=fs.readdirSync(new URL('assets/',base));const bytes=files.filter(n=>!n.startsWith('music.')).reduce((sum,n)=>sum+read('assets/'+n).length,0)+['index.html','style.css','app.js','motion.js','config.js'].reduce((sum,n)=>sum+read(n).length,0);assert(bytes<3_000_000);console.log(`PASS: assets, real audio headers, <=250 KiB art, dates, URL metadata, single live region. Local page assets excluding audio: ${bytes} bytes. CDN transfer not included; Lighthouse not measured.`);

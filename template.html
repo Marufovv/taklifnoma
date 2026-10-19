@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="uz" data-theme="{{theme}}">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{groom}} &amp; {{bride}} — {{dateShort}}</title>
+<meta name="theme-color" content="#0f3d33"><meta name="description" content="{{groom}} va {{bride}}ning nikoh to‘yiga taklifnoma. {{dateFull}}, {{times}}. {{venue}}, {{address}}.">
+<meta property="og:type" content="website"><meta property="og:title" content="{{groom}} &amp; {{bride}} — Nikoh taklifnomasi"><meta property="og:description" content="{{dateFull}} · {{times}} · {{venue}} to‘yxonasi"><meta property="og:url" content="{{siteUrl}}"><meta property="og:image" content="{{ogImage}}"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{{ogImage}}">
+<link rel="icon" href="assets/favicon.svg"><link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,300;1,500&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add('js');setTimeout(()=>document.documentElement.classList.add('loaded'),1600)</script>
+<script src="config.js" defer></script><script src="app.js" defer></script><script type="module" src="motion.js"></script>
+</head>
+<body>
+<svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"><defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/></filter><symbol id="sprig" viewBox="0 0 100 180"><path d="M50 175Q35 95 65 8M48 140Q6 130 14 100Q48 108 48 140M47 110Q88 95 88 65Q48 75 47 110M51 75Q20 62 30 33Q58 44 51 75M58 42Q84 30 78 7Q62 19 58 42" fill="none" stroke="currentColor" stroke-width="1"/></symbol><symbol id="note" viewBox="0 0 24 24"><path d="M9 17V5l11-2v12M9 8l11-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="17" cy="16" rx="3" ry="2"/></symbol><symbol id="heart" viewBox="0 0 24 24"><path d="M12 20S2 14 2 7a5 5 0 0 1 10-1A5 5 0 0 1 22 7c0 7-10 13-10 13Z"/></symbol></defs></svg>
+<a class="skip" href="#taklif">Taklifnomaga o‘tish</a>
+<div class="loader" aria-hidden="true"><svg viewBox="0 0 200 100"><path d="M75 18C15-8 15 55 55 50C95 45 90 100 28 80M173 25C115-10 99 90 150 86C177 85 181 63 176 56H149"/></svg><span>{{groom}} & {{bride}}</span></div>
+<canvas id="world" aria-hidden="true"></canvas><div class="cursor" aria-hidden="true"></div><div class="reading-progress" aria-hidden="true"></div>
+<main>
+<section class="cover dark" id="muqova" aria-labelledby="cover-title">
+ <nav class="topbar"><a class="brand" href="#muqova" aria-label="Bosh sahifa">S<span>&</span>G</a><span>{{dateShort}}</span><a href="#tabrik">Ezgu tilak <span aria-hidden="true">↗</span></a></nav>
+ <svg class="corner corner-a" aria-hidden="true"><use href="#sprig"/></svg><svg class="corner corner-b" aria-hidden="true"><use href="#sprig"/></svg>
+ <div class="cover-content"><p class="eyebrow" data-copy="invitationLabel">{{copy.invitationLabel}}</p>
+ <h1 id="cover-title"><span data-groom>{{groom}}</span><em class="foil">&</em><span data-bride>{{bride}}</span></h1>
+ <p class="cover-note" data-copy="coverNote">{{copy.coverNote}}</p>
+ <div class="envelope-stage" aria-hidden="true"><div class="envelope"><div class="envelope-back"></div><div class="letter"><span>{{groom}} & {{bride}}</span><small>{{dateShort}}</small></div><div class="envelope-front"></div><div class="envelope-flap"></div><div class="seal">S&G</div></div></div>
+ <a class="button gold" id="open-invite" href="#taklif"><span data-copy="open">{{copy.open}}</span><span aria-hidden="true">↗</span></a>
+ <p class="cover-date">{{dateFull}} <span>—</span> {{times}}</p></div>
+ <div class="cover-bottom"><span data-copy="motto">{{copy.motto}}</span><a href="#taklif" aria-label="Pastga o‘tish">↓</a><span>BUVAYDA · FARG‘ONA</span></div>
+</section>
+<section class="invitation light section" id="taklif" tabindex="-1">
+ <div class="chapter"><span>01</span><span data-copy="bismillah">{{copy.bismillah}}</span><span>TAKLIF</span></div>
+ <p class="greeting reveal" data-copy="greeting">{{copy.greeting}}</p>
+ <h2 class="names" aria-label="{{groom}} va {{bride}}"><span data-groom>{{groom}}</span><em>&</em><span data-bride>{{bride}}</span></h2>
+ <div class="invitation-bottom"><svg class="sprig" aria-hidden="true"><use href="#sprig"/></svg><div><p class="serif-copy reveal" data-copy="invitation">{{copy.invitation}}</p><p class="small-copy reveal" data-copy="invitationEnd">{{copy.invitationEnd}}</p></div><span class="edition" aria-hidden="true">S / G<br>2026</span></div>
+ <p id="parents" hidden></p>
+</section>
+<section class="date-section dark section" id="sana">
+ <div class="chapter"><span>02</span><span data-copy="dateLabel">{{copy.dateLabel}}</span><span>{{year}}</span></div>
+ <div class="date-layout"><div class="date-art"><span class="huge-date foil">{{day}}</span><p class="date-month">{{month}} <em>{{year}}</em></p><p class="eyebrow weekday">{{weekday}} · {{times}}</p></div>
+ <div class="date-details"><p class="eyebrow" data-copy="countdownLabel">{{copy.countdownLabel}}</p><h2 class="section-title reveal"><span data-copy="dateTitle">{{copy.dateTitle}}</span><br><em data-copy="dateItalic">{{copy.dateItalic}}</em></h2><div class="countdown" aria-label="To‘ygacha qolgan vaqt"><div><strong id="days">00</strong><span>kun</span></div><div><strong id="hours">00</strong><span>soat</span></div><div><strong id="minutes">00</strong><span>daqiqa</span></div><div><strong id="seconds">00</strong><span>soniya</span></div></div><p id="countdown-status" class="quiet">Toshkent vaqti bilan</p><button class="button outline" id="calendar">Taqvimga saqlash <span aria-hidden="true">＋</span></button></div></div>
+</section>
+<section class="program light section" id="dastur"><div class="chapter"><span>03</span><span data-copy="programLabel">{{copy.programLabel}}</span><span>DASTUR</span></div><div class="program-layout"><h2 class="section-title reveal"><span data-copy="programTitle">{{copy.programTitle}}</span><br><em data-copy="programItalic">{{copy.programItalic}}</em></h2><ol class="timeline">{{programHTML}}</ol></div><p id="dress-code" hidden></p></section>
+<section class="memories dark section" id="xotiralar"><div class="chapter"><span>04</span><span data-copy="galleryLabel">{{copy.galleryLabel}}</span><span>XOTIRALAR</span></div><h2 class="section-title reveal"><span data-copy="galleryTitle">{{copy.galleryTitle}}</span><br><em class="foil" data-copy="galleryItalic">{{copy.galleryItalic}}</em></h2>
+ <div class="gallery-stage" tabindex="0" role="region" aria-label="Esdalik suratlari. O‘ng va chap tugmalar bilan suring."><div class="gallery">{{photosHTML}}</div></div><div class="gallery-controls"><button id="gallery-prev" aria-label="Oldingi surat">←</button><span>SURATLARNI SURING</span><button id="gallery-next" aria-label="Keyingi surat">→</button></div><p class="quote" data-copy="quote">{{copy.quote}}</p>
+</section>
+<section class="venue light section" id="manzil"><div class="chapter"><span>05</span><span data-copy="venueLabel">{{copy.venueLabel}}</span><span>MANZIL</span></div><div class="venue-heading"><h2 class="section-title reveal"><span data-venue>{{venue}}</span><br><em>to‘yxonasi</em></h2><span class="venue-number">{{dateShort}}</span></div>
+ <figure class="venue-art reveal"><picture><source srcset="{{artwork.webp}}" type="image/webp"><img src="{{artwork.fallback}}" width="{{artwork.width}}" height="{{artwork.height}}" alt="{{artwork.alt}}" loading="lazy" decoding="async"></picture><figcaption data-copy="venueArtCaption">{{copy.venueArtCaption}}</figcaption></figure>
+ <div class="venue-details"><div><p class="eyebrow">MANZIL</p><p data-address>{{address}}</p><small data-landmark>{{landmark}}</small><a id="venue-phone" hidden></a></div><div><p class="eyebrow">SANA VA VAQT</p><p>{{dateFull}}</p><small>{{times}} · Toshkent vaqti</small></div><div class="map-actions"><a class="button solid" id="google-map" href="{{googleMap}}" target="_blank" rel="noopener noreferrer">Google Maps ↗</a><a id="yandex-map" href="{{yandexMap}}" target="_blank" rel="noopener noreferrer">Yandex Maps ↗</a><button id="copy-address">Manzilni nusxalash</button></div></div>
+</section>
+<section class="wishes light section" id="tabrik"><picture class="wish-botanical" aria-hidden="true"><source srcset="{{botanical.webp}}" type="image/webp"><img src="{{botanical.fallback}}" width="{{botanical.width}}" height="{{botanical.height}}" alt="" loading="lazy"></picture><div class="wish-layout"><div class="wish-intro"><p class="eyebrow" data-copy="wishesLabel">{{copy.wishesLabel}}</p><h2 class="section-title reveal"><span data-copy="wishesTitle">{{copy.wishesTitle}}</span><br><em data-copy="wishesItalic">{{copy.wishesItalic}}</em></h2><p data-copy="wishesNote">{{copy.wishesNote}}</p><span class="signature" data-couple>{{groom}} & {{bride}}</span></div>
+ <form id="wish-form"><div class="honeypot" aria-hidden="true"><label>Website<input name="website" id="website" tabindex="-1" autocomplete="off"></label></div><label for="wish" data-copy="wishLabel">{{copy.wishLabel}}</label><textarea id="wish" required minlength="3" maxlength="1800" rows="5" placeholder="{{copy.wishPlaceholder}}"></textarea><div class="form-meta"><span id="char-count">0 / 1800</span><span>Mehr bilan yozing</span></div><button class="button solid" type="submit">Telegram orqali yo‘llash <span aria-hidden="true">↗</span></button><p class="form-note">Tabrigingiz Telegramda ochiladi. Yuborishni u yerda yakunlang.</p><div class="wish-actions" hidden><a id="telegram-retry" target="_blank" rel="noopener noreferrer">Telegramni ochish ↗</a><button type="button" id="copy-wish">Matnni nusxalash</button></div></form></div>
+ <noscript><p>Tilagingizni <a href="https://t.me/{{telegram}}">Telegram orqali yo‘llang</a>.</p></noscript>
+</section>
+</main>
+<footer class="closing dark section"><p class="eyebrow" data-copy="closingLabel">{{copy.closingLabel}}</p><h2 class="section-title reveal"><span data-copy="closingTitle">{{copy.closingTitle}}</span><br><em class="foil" data-copy="closingItalic">{{copy.closingItalic}}</em></h2><svg class="monogram reveal" viewBox="0 0 200 100" role="img" aria-label="S va G monogrammasi"><path d="M75 18C15-8 15 55 55 50C95 45 90 100 28 80M173 25C115-10 99 90 150 86C177 85 181 63 176 56H149"/></svg><p data-couple>{{groom}} & {{bride}}</p><div class="footer-line"><span>{{dateShort}} · {{venue}}</span><button id="share">Taklifnomani ulashish ↗</button><a href="#muqova">Yuqoriga ↑</a></div></footer>
+<div class="music-dock"><span class="music-label">{{music.title}}</span><button id="music-toggle" aria-label="Musiqani tinglash" aria-pressed="false"><svg class="music-icon" aria-hidden="true"><use href="#note"/></svg><span class="equalizer" aria-hidden="true"><i></i><i></i><i></i></span></button><div class="music-particles" aria-hidden="true"></div></div>
+<audio id="music" preload="none" loop><source src="{{music.mp3}}" type="audio/mpeg"><source src="{{music.m4a}}" type="audio/mp4"></audio><noscript><audio controls preload="none"><source src="{{music.mp3}}" type="audio/mpeg"><source src="{{music.m4a}}" type="audio/mp4"></audio></noscript>
+<div id="status" role="status" aria-live="polite" class="toast"></div>
+</body></html>
